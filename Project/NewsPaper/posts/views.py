@@ -11,6 +11,15 @@ from .filters import PostFilter
 from .forms import PostForm
 from pprint import pprint
 from django.core.mail import send_mail
+from .tasks import hello
+
+
+class HelloView(View):
+
+    def get(self, request):
+        # printer.delay()
+        hello.delay()
+        return HttpResponse('Hello!')
 
 
 class PostList(ListView):
